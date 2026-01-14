@@ -23,6 +23,7 @@ public class UserLoginTests extends BaseTest {
         user.setName(RandomStringUtils.randomAlphabetic(8));
         user.setEmail(RandomStringUtils.randomAlphabetic(8) + "@yandex.ru");
         user.setPassword(RandomStringUtils.randomAlphabetic(8));
+        userSteps.createUser(user);
     }
 
     @After
@@ -37,7 +38,6 @@ public class UserLoginTests extends BaseTest {
     @DisplayName("Успешное логирование под существующим пользователем")
     @Description("Возможность логирования под существующим пользователем")
     public void loginWithCorrectUser() {
-        userSteps.createUser(user);
         UserSteps
                 .loginUser(user)
                 .statusCode(SC_OK)
@@ -51,7 +51,6 @@ public class UserLoginTests extends BaseTest {
     @DisplayName("Невозможность логирования с некорректным 'email'")
     @Description("Невозможность логирования с некорректным полем 'email'")
     public void canNotLoginUserWithINcorrectEmailTest() {
-        userSteps.createUser(user);
         user.setEmail("aaaaaa");
         UserSteps
                 .loginUser(user)
@@ -64,7 +63,6 @@ public class UserLoginTests extends BaseTest {
     @DisplayName("Невозможность логирования с некорректным 'password'")
     @Description("Невозможность логирования с некорректным полем 'password'")
     public void canNotLoginUserWithINcorrectPasswordTest() {
-        userSteps.createUser(user);
         user.setPassword("aaaaaa");
         UserSteps
                 .loginUser(user)
